@@ -1,0 +1,55 @@
+{
+    "title": "Create Bets",
+    "name": "Bets",
+    "jsonPage": "viewBets",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Bets"],
+    "fields": [{
+        "name": "name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "name",
+        "id": "name",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Multiplier",
+        "type": "number",
+        "tableRef": "multiplier",
+        "placeholder": "Enter multiplier",
+        "id": "multiplier",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Numbers",
+        "type": "number",
+        "tableRef": "numbers",
+        "validation": ["", "trim", ""],
+        "placeholder": "Enter multiplier",
+        "id": "multiplier",
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitBets",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewBets"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewBets"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Bets/save"
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "title": "Create Game",
+    "name": "Game",
+    "jsonPage": "viewGame",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Game"],
+    "fields": [{
+        "name": "timestamp",
+        "type": "date",
+        "tableRef": "timestamp",
+        "placeholder": "Entertimestamp",
+        "id": "timestamp",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "results",
+        "type": "text",
+        "tableRef": "results",
+        "placeholder": "Enter results",
+        "id": "results",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitGame",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewGame"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewGame"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Game/save"
+    }
+}

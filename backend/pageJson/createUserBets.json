@@ -1,0 +1,75 @@
+{
+    "title": "Create UserBets",
+    "name": "UserBets",
+    "jsonPage": "viewUserBets",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["UserBets"],
+    "fields": [{
+        "name": "User",
+        "id": "user",
+        "type": "tags",
+        "tableRef": "user",
+        "placeholder": "User",
+        "dropDownField": "name",
+        "dropDownType": "single",
+        "searchApi": "searchCall",
+        "url": "User/search",
+        "onView": true,
+        "validation": ["trim"]
+    }, {
+        "name": "Game",
+        "id": "game",
+        "type": "tags",
+        "tableRef": "game",
+        "placeholder": "game",
+        "dropDownField": "results",
+        "dropDownType": "single",
+        "searchApi": "searchCall",
+        "url": "Game/search",
+        "view": true,
+        "validation": ["trim"]
+    }, {
+        "name": "amountplaces",
+        "type": "number",
+        "tableRef": "amountplaces",
+        "placeholder": "Enter Amount Places",
+        "id": "amountplaces",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Bet",
+        "id": "bet",
+        "type": "tags",
+        "tableRef": "bet",
+        "placeholder": "bet",
+        "dropDownField": "name",
+        "dropDownType": "single",
+        "searchApi": "searchCall",
+        "url": "Bets/search",
+        "view": true,
+        "validation": ["trim"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitUserBets",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewUserBets"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewUserBets"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "UserBets/save"
+    }
+}

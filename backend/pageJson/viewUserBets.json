@@ -1,0 +1,57 @@
+{
+    "title": "UserBets",
+    "description": "List of UserBetss",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "User",
+        "isSort": "",
+        "tableRef": "user"
+    }, {
+        "name": "Game",
+        "isSort": "",
+        "tableRef": "game"
+    }, {
+        "name": "Amount Places",
+        "isSort": "",
+        "tableRef": "amountplaces"
+    }, {
+        "name": "Bet",
+        "isSort": "",
+        "tableRef": "bet"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editUserBets",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete UserBets",
+        "content": "Are you sure you want to delete UserBets?",
+        "api": "UserBets/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createUserBets"
+    }],
+    "apiCall": {
+        "url": "UserBets/search",
+        "params": "_id"
+    }
+}

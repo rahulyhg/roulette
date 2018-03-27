@@ -1,0 +1,49 @@
+{
+    "title": "Game",
+    "description": "List of Games",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "timestamp",
+        "isSort": "",
+        "tableRef": "timestamp"
+    }, {
+        "name": "Results",
+        "isSort": "",
+        "tableRef": "results"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editGame",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Game",
+        "content": "Are you sure you want to delete Game?",
+        "api": "Game/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createGame"
+    }],
+    "apiCall": {
+        "url": "Game/search",
+        "params": "_id"
+    }
+}
