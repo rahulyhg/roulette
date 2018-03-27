@@ -23,7 +23,7 @@
         "url": ""
     }, {
         "name": "Numbers",
-        "type": "number",
+        "type": "text",
         "tableRef": "numbers",
         "validation": ["", "trim", ""],
         "placeholder": "Enter number",
