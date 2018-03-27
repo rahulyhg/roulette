@@ -26,6 +26,7 @@ module.exports = mongoose.model('Config', schema);
 
 var models = {
     maxRow: 10,
+    backendUrl: "192.168.1.129:1337/api/",
     getForeignKeys: function (schema) {
         var arr = [];
         _.each(schema.tree, function (n, name) {
