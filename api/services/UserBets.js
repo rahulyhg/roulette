@@ -41,7 +41,7 @@ var model = {
 
     /**
      * this function to call another server api
-     * @param {data} input 
+     * @param {userBets} input body
      * @param {model} input modelname/serviceName
      * @param {callback} callback function with err and response
      */
@@ -72,8 +72,8 @@ var model = {
     /**
      * this function to save userBets
      * @param {userBets.user} input userID
-     * @param {userBets.bet} input userID
-     * @param {userBets.amountPlaces} input userID
+     * @param {userBets.bet} input betId
+     * @param {userBets.amountPlaces} input amountPlace
      * @param {callback} callback function with err and response
      */
     saveUserBets: function (userBets, callback) {
@@ -81,33 +81,40 @@ var model = {
         Game.findOne({
             "results": {
                 $exists: false
-            }
+            },
+            "betsAvailable": true
         }).lean().exec(function (err, game) {
-            userBets.game = game._id;
-            UserBets.saveData(userBets, function (err, savedData) {
-                if (err) {
-                    console.log("err in saving userbets", err);
-                    callback(err, null);
-                } else if (_.isEmpty(savedData)) {
-                    callback(null, false);
-                } else {
-                    var model = "Member/deductMoney";
-                    var userBets = {
-                        user: savedData.user,
-                        amountplaces: savedData.amountplaces
+            if (!_.isEmpty(game)) {
+                userBets.game = game._id;
+                UserBets.saveData(userBets, function (err, savedData) {
+                    if (err) {
+                        console.log("err in saving userbets", err);
+                        callback(err, null);
+                    } else if (_.isEmpty(savedData)) {
+                        console.log("no match found");
+                        callback(null, false);
+                    } else {
+                        var model = "Member/deductMoney";
+                        var userBets = {
+                            user: savedData.user,
+                            amountplaces: savedData.amountplaces
+                        }
+                        UserBets.callApiToSave(userBets, model, function (data) {
+                            console.log("@@@", data);
+                            callback(null, data);
+                        });
                     }
-                    UserBets.callApiToSave(userBets, model, function (data) {
-                        console.log("@@@", data);
-                        callback(null, data);
-                    });
-                }
-            });
+                });
+            } else {
+                callback(null, "can not place bet");
+            }
         });
     },
 
     /**
-     * this function to save game result
-     * @param {gameResult.result} input results
+     * this function to save game result and upadte the winning 
+     * amount in win users
+     * @param {gameResult.result} input game results
      * @param {callback} callback function with err and response
      */
     saveGameResults: function (gameResult, callback) {
